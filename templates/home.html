@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <main class="container" style="text-align: center; padding-top: 5rem;">
+        <div class="card-stack" style="display: inline-block; transform: scale(1.5); margin-bottom: 2rem;">
+            <div class="card">VCF</div>
+            <div class="card">Flashcard</div>
+            <div class="card">QR</div>
+        </div>
+
+        <div style="margin-top: 2rem;">
+            <p style="margin-bottom: 1rem;">Your universal digital contact card</p>
+        </div>
+
+        {% if qr_image %}
+            <section>
+                <p>QR code without mobile (<a href="{% url 'qr_code_with_mobile' %}">want with mobile?</a>)</p>
+                <figure>
+                    <img src="data:image/png;base64,{{ qr_image }}" alt="QR Code" id="qrCode">
+                </figure>
+            </section>
+        {% else %}
+            <a href="{% url 'account_signup' %}" class="button primary" style="margin-top: 2rem;">
+                Get started!
+            </a>
+        {% endif %}
+
+        <div class="row" style="padding-top: 7.5rem;">
+            <div class="col">
+                <h3>Simplify sharing your contact</h3>
+                <p>Share your contact information with a simple QR code. Signup, add details and get your QR code.</p>
+                <p>
+                    No need to exchange business cards or type in contact information. No need to use a specific
+                    platform or app. Just ask people to scan the code!
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        .card-stack {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        .card {
+            position: absolute;
+            width: 150px;
+            height: 90px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .card:nth-child(1) {
+            transform: rotate(-15deg) translateX(-20px);
+        }
+
+        .card:nth-child(2) {
+            transform: rotate(0deg);
+            z-index: 1;
+        }
+
+        .card:nth-child(3) {
+            transform: rotate(15deg) translateX(20px);
+        }
+
+        .card-stack:hover .card:nth-child(1) {
+            transform: rotate(-25deg) translateX(-40px);
+        }
+
+        .card-stack:hover .card:nth-child(3) {
+            transform: rotate(25deg) translateX(40px);
+        }
+    </style>
+
+{% endblock content %}

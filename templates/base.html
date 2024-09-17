@@ -1,0 +1,40 @@
+{% load static %} {% load pwa %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://unpkg.com/chota@latest" />
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        {% include '_partials/analytics.html' %}
+        <title>Flashcard</title>
+        {% progressive_web_app_meta %}
+    </head>
+    <body>
+        <main class="container">
+            <nav class="nav">
+                <div class="nav-left">
+                    <a href="/"><strong>Flashcard</strong></a>
+                </div>
+                <div class="nav-right">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'qr_code' %}">Your QR</a>
+                    <a href="{% url 'update_profile' %}">Profile</a>
+                    <a href="{% url 'account_logout' %}">Sign Out</a>
+                    {% else %}
+                    <a href="{% url 'account_login' %}">Sign In</a>
+                    <a href="{% url 'account_signup' %}">Sign Up</a>
+                    {% endif %}
+                </div>
+            </nav>
+            {% block content %} {% endblock content %}
+        </main>
+    </body>
+</html>

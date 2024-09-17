@@ -1,0 +1,10 @@
+django==5.1.1
+django-allauth==64.2.1
+gunicorn==23.0.0
+whitenoise==6.7.0
+
+qrcode==7.4.2
+vobject==0.9.7
+dj-database-url==2.2.0
+psycopg2-binary==2.9.9
+django-pwa==2.0.0

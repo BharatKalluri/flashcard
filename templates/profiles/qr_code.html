@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <style>
+        .centered-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .button-group {
+            margin-bottom: 2rem;
+        }
+
+        .button-group a {
+            margin: 0 0.5rem;
+        }
+    </style>
+
+    <main class="centered-content">
+        <section>
+            <h1>QR Code</h1>
+            <div class="button-group">
+                <a href="{% url 'qr_code' %}">
+                    <button class="primary">Without mobile</button>
+                </a>
+                <a href="{% url 'qr_code_with_mobile' %}">
+                    <button class="primary">With mobile</button>
+                </a>
+            </div>
+        </section>
+
+        <figure>
+            <img src="data:image/png;base64,{{ qr_image }}" alt="QR Code" id="qrCode">
+        </figure>
+    </main>
+
+{% endblock %}
