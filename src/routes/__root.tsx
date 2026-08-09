@@ -1,6 +1,12 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
-import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import {
+	createRootRoute,
+	HeadContent,
+	Scripts,
+	useRouterState,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { LoaderCircle } from "lucide-react";
 
 import appCss from "../styles.css?url";
 
@@ -35,6 +41,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
+				<NavigationProgress />
 				{children}
 				<TanStackDevtools
 					config={{
@@ -50,5 +57,27 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<Scripts />
 			</body>
 		</html>
+	);
+}
+
+function NavigationProgress() {
+	const isPending = useRouterState({
+		select: (state) => state.status === "pending",
+	});
+
+	if (!isPending) return null;
+
+	return (
+		<div className="navigation-progress" aria-live="polite">
+			<div className="navigation-progress__rail" aria-hidden="true">
+				<div className="navigation-progress__rail-fill" />
+			</div>
+			<div className="navigation-progress__notice">
+				<LoaderCircle
+					className="navigation-progress__icon"
+					aria-hidden="true"
+				/>
+			</div>
+		</div>
 	);
 }
