@@ -1,13 +1,13 @@
-import { config } from 'dotenv'
 import { defineConfig } from 'drizzle-kit'
-
-config({ path: ['.env.local', '.env'] })
+import { getDatabaseUrl } from './src/lib/env.server'
 
 export default defineConfig({
   out: './drizzle',
   schema: './src/db/schema.ts',
   dialect: 'postgresql',
+  schemaFilter: ['flashcard'],
+  migrations: { schema: 'flashcard' },
   dbCredentials: {
-    url: process.env.DATABASE_URL,
+    url: getDatabaseUrl(),
   },
 })
