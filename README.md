@@ -45,6 +45,10 @@ There are no public profiles or card URLs, QR downloads, recipient accounts, ana
 
 The app runs at `http://localhost:3000`.
 
+## PWA behavior
+
+Flashcard can be installed from a supported browser after its first visit. Its app shell and static assets remain available offline, but sign-in, card loading, and saves require a network connection. Card data and authentication responses are never cached by the service worker.
+
 ## Database rule
 
 All application and Better Auth tables must live in the PostgreSQL `flashcard` schema—never `public`. The migration setup and schema definitions enforce this. After migrating, verify it with:

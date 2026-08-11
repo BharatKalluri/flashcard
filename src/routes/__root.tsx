@@ -8,6 +8,7 @@ import {
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { LoaderCircle } from "lucide-react";
 
+import { PwaRegister } from "../components/pwa-register";
 import appCss from "../styles.css?url";
 
 export const Route = createRootRoute({
@@ -23,11 +24,36 @@ export const Route = createRootRoute({
 			{
 				title: "Flashcard · VCF contact cards",
 			},
+			{
+				name: "theme-color",
+				content: "#173a40",
+			},
+			{
+				name: "apple-mobile-web-app-capable",
+				content: "yes",
+			},
+			{
+				name: "apple-mobile-web-app-status-bar-style",
+				content: "black-translucent",
+			},
 		],
 		links: [
 			{
 				rel: "stylesheet",
 				href: appCss,
+			},
+			{
+				rel: "manifest",
+				href: "/manifest.webmanifest",
+			},
+			{
+				rel: "icon",
+				href: "/icons/flashcard-192.svg",
+				type: "image/svg+xml",
+			},
+			{
+				rel: "apple-touch-icon",
+				href: "/icons/flashcard-180.svg",
 			},
 		],
 	}),
@@ -43,6 +69,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<body>
 				<NavigationProgress />
 				{children}
+				<PwaRegister />
 				<TanStackDevtools
 					config={{
 						position: "bottom-right",

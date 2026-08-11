@@ -62,6 +62,24 @@
   --sidebar-ring: oklch(0.871 0.006 286.286);
 }
 
+.pwa-update {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: var(--surface-strong);
+  box-shadow: 0 12px 32px rgba(23, 58, 64, 0.18);
+  color: var(--sea-ink);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
 .dark {
   --sea-ink: #d7ece8;
   --sea-ink-soft: #afcdc8;
