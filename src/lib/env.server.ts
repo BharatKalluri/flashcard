@@ -5,7 +5,6 @@ config({ path: [".env.local", ".env"] });
 
 const serverEnvSchema = z.object({
 	DATABASE_URL: z.string().min(1),
-	DATABASE_SSL_CA_BASE64: z.string().min(1).optional(),
 	BETTER_AUTH_SECRET: z.string().min(32),
 	BETTER_AUTH_URL: z.string().url().optional(),
 });
@@ -19,5 +18,8 @@ if (!parsed.success) {
 export const serverEnv = parsed.data;
 
 export function getDatabaseUrl() {
-	return serverEnv.DATABASE_URL;
+	const databaseUrl = new URL(serverEnv.DATABASE_URL);
+	databaseUrl.searchParams.delete("sslrootcert");
+
+	return databaseUrl.toString();
 }

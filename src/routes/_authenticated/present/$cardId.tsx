@@ -1,7 +1,9 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { ArrowLeft } from "lucide-react";
 import QRCode from "qrcode";
 import { useEffect, useState } from "react";
 
+import { Button } from "#/components/ui/button";
 import { getCard } from "#/lib/cards.functions";
 
 export const Route = createFileRoute("/_authenticated/present/$cardId")({
@@ -27,7 +29,13 @@ function CardPresentationPage() {
 	}, [card.vcf]);
 
 	return (
-		<main className="flex min-h-screen flex-col items-center justify-center gap-8 p-6 text-center">
+		<main className="relative flex min-h-screen flex-col items-center justify-center gap-8 p-6 text-center">
+			<Button asChild variant="ghost" className="absolute top-6 left-6">
+				<Link to="/dashboard">
+					<ArrowLeft />
+					All cards
+				</Link>
+			</Button>
 			<h1 className="display-title text-4xl font-medium tracking-tight text-foreground">
 				{card.name}
 			</h1>
